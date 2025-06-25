@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Atividade</title>
+
+    <style>
+        *{
+            margin: 0;
+            padding: 15px;
+        
+        }
+
+        body{
+            font-family:Arial, Helvetica, sans-serif ;
+            color: rgb(56, 44, 44);
+            background-color: rgb(245, 178, 178);
+        }
+
+        p{
+            margin: 1rem 0;
+
+        }
+
+        .cabecalho{
+            background-color: wheat;
+            color: black;
+            text-align: center;
+        }
+
+        .cabecalho > h1{
+           padding-top: 1rem;
+        }
+
+        ul.menu{
+            list-style-type: none;
+
+        }
+
+        ul.menu > li{
+            display: inline-block;
+        }
+
+        ul.menu > li > a{
+            color: black;
+            text-decoration: none;
+            padding: 4px 16px;
+            display: block;
+        }
+         ul.menu > li > a:hover{
+            background-color: lightcoral;
+          
+         }
+
+         .principal{
+            max-width: 960px;
+            margin: auto;
+            padding: 4rem;
+
+        
+         }
+
+         .rodape{
+            background-color: lightcoral;
+            text-align: center;
+            padding: 2rem;
+         }
+
+         mark{
+           background-color: wheat
+         }
+
+    
+        .error {
+            color: red; 
+            font-size: 14px;
+            font-weight: bold; 
+        }
+    
+    </style>
+</head>
+<body>
+    <div class="cabecalho">
+        <h1>Melhores Animes </h1>
+
+
+        <ul class="menu">
+            <li><a href="Pagina1.html">Inicio</a></li>
+            <li><a href="pagina 2.html">Sobre</a></li>
+            <li><a href="pagina 3.html">Fotos</a></li>
+            <li><a href="pagina 4.html">Contato</a></li>
+            <li><a href="pagina 5.html">Formulario</a></li>
+        </ul>
+    </div>
+
+   <div class="principal">
+      <div class="secao">
+        <div>
+            <h2>Cadastro de Formulário</h2>
+            <form id="formulario">
+        
+                <label>Nome:</label> <br>
+                <span class="error" id="erroNome"></span> <br>
+                <input type="text" id="nome">
+                </span> <br><br>
+        
+                <label>E-mail:</label> <br>
+                <span class="error" id="erroEmail"></span> <br>
+                <input type="email" id="email">
+                 <br><br>
+        
+                <label>Idade:</label> <br>
+                <span class="error" id="erroIdade"></span> <br>
+                <input type="number" id="idade">
+                <br><br>
+        
+                <label>Senha:</label> <br>
+                <span class="error" id="erroSenha"></span> <br>
+                <input type="password" id="senha">
+                 <br><br>
+        
+                <button type="submit">Cadastrar</button>
+            </form>
+        
+            <script>
+                document.getElementById("formulario").addEventListener("submit", function(event) {
+                    event.preventDefault(); 
+        
+                    let nome = document.getElementById("nome").value;
+                    let email = document.getElementById("email").value;
+                    let idade = parseInt(document.getElementById("idade").value); 
+                    let senha = document.getElementById("senha").value;
+                    let valido = true;
+        
+                    
+                    document.getElementById("erroNome").textContent = "";
+                    document.getElementById("erroEmail").textContent = "";
+                    document.getElementById("erroIdade").textContent = "";
+                    document.getElementById("erroSenha").textContent = "";
+        
+                    
+                    if (nome.trim() === "") {
+                        document.getElementById("erroNome").textContent = "Nome é obrigatório!";
+                        valido = false;
+                    }
+        
+                   
+                    let emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                    if (!emailRegex.test(email)) {
+                        document.getElementById("erroEmail").textContent = "E-mail inválido!";
+                        valido = false;
+                    }
+        
+                   
+                    if (isNaN(idade) || idade < 18) {
+                        document.getElementById("erroIdade").textContent = "Idade mínima é 18 anos!";
+                        valido = false;
+                    }
+        
+                   
+                    let senhaRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,}$/;
+                    if (!senhaRegex.test(senha)) {
+                        document.getElementById("erroSenha").textContent = "Senha deve ter 6 caracteres, com letras e números!";
+                        valido = false;
+                    }
+        
+                   
+                    if (valido) {
+                        alert("Cadastro realizado com sucesso!");
+                        document.getElementById("formulario").reset();
+                    }
+                });
+            </script>
+        </div>
+        
+      <div class="rodape">
+        Feito por Thayná Cuellar- Técnica em Informática
+      </div>
+   </div>
+</body>
+</html>

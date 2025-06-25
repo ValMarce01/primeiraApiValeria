@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Atividade</title>
+
+    <style>
+        *{
+            margin: 0;
+            padding: 15px;
+        
+        }
+
+        body{
+            font-family:Arial, Helvetica, sans-serif ;
+            color: rgb(56, 44, 44);
+            background-color: rgb(245, 178, 178);
+        }
+
+        p{
+            margin: 1rem 0;
+
+        }
+
+        .cabecalho{
+            background-color: wheat;
+            color: black;
+            text-align: center;
+        }
+
+        .cabecalho > h1{
+           padding-top: 1rem;
+        }
+
+        ul.menu{
+            list-style-type: none;
+
+        }
+
+        ul.menu > li{
+            display: inline-block;
+        }
+
+        ul.menu > li > a{
+            color: black;
+            text-decoration: none;
+            padding: 4px 16px;
+            display: block;
+        }
+         ul.menu > li > a:hover{
+            background-color: lightcoral;
+          
+         }
+
+         .principal{
+            max-width: 960px;
+            margin: auto;
+            padding: 4rem;
+           
+
+        
+         }
+
+         .rodape{
+            background-color: lightcoral;
+            text-align: center;
+            padding: 2rem;
+         }
+
+         mark{
+           background-color: wheat
+         }
+    </style>
+</head>
+<body>
+    <div class="cabecalho">
+        <h1>Melhores Animes </h1>
+
+
+        <ul class="menu">
+            <li><a href="Pagina1.html">Inicio</a></li>
+            <li><a href="pagina 2.html">Sobre</a></li>
+            <li><a href="pagina 3.html">Fotos</a></li>
+            <li><a href="pagina 4.html">Contato</a></li>
+            <li><a href="pagina 5.html">Formulario</a></li>
+            
+        </ul>
+    </div>
+
+   <div class="principal">
+    
+      <div class="secao">
+        <main>
+            <h1> Contato</h1>
+                <div class="container">
+                    <form action= "xxxxx" method="POST">
+
+                        <label for="nome">Seu Nome: (obrigatório)</label> <br>
+                        <input type="text" id="nome" name="nome" required>
+
+                    <br>
+                    <br>
+
+                        <label for="email">Seu E-mail:(obrigatório)</label> <br>
+                        <input type="email" id="email" name="email" required>
+
+                    <br>
+                    <br>
+
+                        <label for="assunto">Assunto:</label> <br>
+                        <input type="text" id="assunto" name="assunto" required>
+
+                    <br>
+                    <br>
+
+                        <label for="mensagem">Mensagem:</label> <br>
+                        <textarea id="mensagem" name="mensagem" required></textarea>
+
+                    <br>
+                    <br>
+
+                        <button type="submit">Enviar</button>
+
+                    </form>
+                </div>
+        </main>
+
+      </div>
+      <div class="rodape">
+        Feito por Thayná Cuellar- Técnica em Informática
+      </div>
+   </div>
+</body>
+</html>

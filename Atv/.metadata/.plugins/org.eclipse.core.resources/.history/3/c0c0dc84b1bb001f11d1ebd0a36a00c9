@@ -1,0 +1,191 @@
+package br.edu.ifms.dao;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
+
+import br.edu.ifms.factory.ConnectFactory;
+import br.edu.ifms.model.Infracao;
+
+
+public class InfracaoDao {
+
+	public void save(Infracao infracao) {
+		
+		String sql = "insert into tb_infracao (descricao,ponto, valor) values (?,?,?)";
+		Connection conn = null;
+		PreparedStatement pstm = null;
+		
+		try {
+			conn = ConnectFactory.createConnectionToMysql();
+			pstm = (PreparedStatement)conn.prepareStatement(sql);
+			pstm.setString(1, infracao.getDescricao());	
+			pstm.setInt(2, infracao.getPonto());
+			pstm.setDouble(3, infracao.getValor());
+			pstm.execute();
+			System.out.println("Infracao salva com sucesso!!");
+						
+		}catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			try {
+				if(pstm!=null)
+					pstm.close();
+				if(conn!=null)
+					conn.close();
+				
+			}catch (Exception e) {
+				// TODO: handle exception
+				e.printStackTrace();
+			}			
+		}		
+	}
+	
+	public void delete(Infracao infracao) {
+		String sql = "delete from tb_infracao where idtb_infracao=?";
+		Connection conn = null;
+		PreparedStatement pstm = null;
+		
+		try {
+			conn = ConnectFactory.createConnectionToMysql();
+			pstm = conn.prepareStatement(sql);
+			pstm.setString(1, infracao.getDescricao());
+			pstm.execute();
+			System.out.println("Carro removido com sucesso!!");			
+			
+		}catch (Exception e) {
+			e.printStackTrace();
+			// TODO: handle exception
+		}finally {
+			try {
+				if (pstm!=null)
+					pstm.close();
+				if (conn!=null)
+					conn.close();
+			}catch (Exception e) {
+				e.printStackTrace();
+				// TODO: handle exception
+			}
+		}
+	}
+	
+	
+	public void update(Infracao infracao) {
+		String sql = "update tb_infracao "
+					+ "set descricao= ?," 
+					+ "ponto = ?," 
+					+ "valor= ?, " 
+					+ "where idtb_infracao = ?"; 
+					
+		Connection conn = null;
+		PreparedStatement pstm = null;
+		
+		try {
+			conn = ConnectFactory.createConnectionToMysql();
+			pstm = conn.prepareStatement(sql);
+			pstm.setString(1, infracao.getDescricao());	
+			pstm.setInt(2, infracao.getPonto());
+			pstm.setDouble(3, infracao.getValor());
+			pstm.setInt(4, infracao.getId()); //mudar o id para int (mudar getter e setter)
+			pstm.execute();
+			System.out.println("Infracao atualizado com sucesso");
+		}catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}finally {
+			try {
+				if (pstm!=null) {
+					pstm.close();
+				}if (conn!=null) {
+					conn.close();
+				}
+			} catch (Exception e) {
+				// TODO: handle exception
+			}
+		}
+	}
+	
+	public List<Infracao> buscarTodos(){
+		String sql = "select * from tb_infracao";
+		Connection conn = null;
+		PreparedStatement pstm = null;
+		ResultSet rset = null;
+		List<Infracao> infracoes = new ArrayList<Infracao>();
+		
+		try {
+			conn = ConnectFactory.createConnectionToMysql();
+			pstm = (PreparedStatement)conn.prepareStatement(sql);
+			rset = pstm.executeQuery();		
+			while(rset.next()) {
+				//descricao, ponto, valor
+				Infracao i = new Infracao();
+				i.setId(rset.getInt("idtb_infracao"));
+				i.setDescricao(rset.getString("descricao"));
+				i.setPonto(rset.getInt("ponto"));
+				i.setValor(rset.getDouble("valor"));
+				
+				infracoes.add(i);
+			}
+			
+						
+		}catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			try {
+				if(rset!=null)
+					rset.close();
+				if(pstm!=null)
+					pstm.close();
+				if(conn!=null)
+					conn.close();
+				
+			}catch (Exception e) {
+				// TODO: handle exception
+				e.printStackTrace();
+			}			
+		}	
+		return infracoes;
+	}
+	
+	public Infracao buscarPorId(Infracao infracao) {
+		
+		String sql = "select * from tb_infracao where idtb_infracao = ?";
+		Connection conn = null;
+		PreparedStatement pstm = null;
+		ResultSet rset = null;
+		Infracao i = new Infracao();
+		
+		try {
+			conn = ConnectFactory.createConnectionToMysql();
+			pstm = (PreparedStatement)conn.prepareStatement(sql);
+			rset = pstm.executeQuery();		
+			if (rset.next()) {			
+				i.setId(rset.getInt("idtb_infracao"));
+				i.setDescricao(rset.getString("descricao"));
+				i.setPonto(rset.getInt("ponto"));
+				i.setValor(rset.getDouble("valor"));				
+			}
+			
+						
+		}catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			try {
+				if(rset!=null)
+					rset.close();
+				if(pstm!=null)
+					pstm.close();
+				if(conn!=null)
+					conn.close();
+				
+			}catch (Exception e) {
+				// TODO: handle exception
+				e.printStackTrace();
+			}			
+		}	
+		return i;
+		
+	}
+}
